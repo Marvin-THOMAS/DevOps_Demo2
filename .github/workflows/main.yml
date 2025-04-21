@@ -1,4 +1,4 @@
-name: Maven Deploy
+name: Build and Deploy to GitHub Packages Manualy
 
 on:
   workflow_dispatch:  # Permet le déclenchement manuel du workflow
@@ -11,12 +11,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up Java 21
+      - name: Set up Java 21 (AdoptOpenJDK)
         uses: actions/setup-java@v2
         with:
           java-version: '21'
+          distribution: 'adoptopenjdk'  # ou 'openjdk' si tu préfères cette distribution
 
       - name: Build and Deploy to GitHub Packages
         run: mvn deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
