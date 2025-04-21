@@ -51,4 +51,11 @@
 		</plugins>
 	</build>
 
+ <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/Octopusy-dev/HelloWordApi</url>
+    </repository>
+  </distributionManagement>
+
 </project>
