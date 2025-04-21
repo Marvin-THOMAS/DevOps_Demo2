@@ -33,8 +33,7 @@ jobs:
           name: helloapi-jar
           path: target/*.jar
           
-      - name: Deploy to GitHub Packages
+      - name: Build and Deploy to GitHub Packages
+        run: mvn deploy -DskipTests
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mvn deploy --settings .github/settings.xml     
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
