@@ -1,11 +1,9 @@
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+<settings>
   <servers>
     <server>
       <id>github</id>
-      <username>Octopusy-dev</username>
-      <password>${env.GITHUB_TOKEN}</password>
+      <username>github</username> <!-- Utilise 'github' comme nom d'utilisateur -->
+      <password>${{ secrets.GITHUB_TOKEN }}</password> <!-- Utilisation du token d'authentification GitHub -->
     </server>
   </servers>
 </settings>
