@@ -24,9 +24,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . \
-            --file Dockerfile \
-            --tag ${{ secrets.DOCKER_USERNAME }}/hello-word-api-java:${{ env.TAG }}
+          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/hello-word-api-java:${{ env.TAG }}
 
       - name: Push Docker image
         run: |
