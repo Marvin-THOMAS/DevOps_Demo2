@@ -11,25 +11,21 @@ jobs:
     name: Checkout Repository
     runs-on: ubuntu-latest
 
-    outputs:
-      tag: ${{ steps.generate-tag.outputs.tag }}
-
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
       - name: Generate Docker image tag
         id: generate-tag
-        run: echo "tag=$(date +%Y%m%d%H%M%S)" >> "$GITHUB_OUTPUT"
-        
-      - name: Affiche le tag
-        run: echo "Tag généré : ${{ steps.generate-tag.outputs.tag }}"
+        run: echo "TAG=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
 
+      - name: Affiche le tag généré
+        run: echo "Tag généré : ${{ env.TAG }}"
 
   build:
     name: Build Docker Image
     runs-on: ubuntu-latest
-    needs: checkout
+    needs: checkout  # Ce job dépend du job "checkout"
 
     steps:
       - name: Checkout the repository
@@ -39,11 +35,11 @@ jobs:
         run: |
           docker build . \
             --file Dockerfile \
-            --tag ${{ env.IMAGE_NAME }}:${{ needs.checkout.outputs.tag }} \
+            --tag ${{ env.IMAGE_NAME }}:${{ env.TAG }} \
             --tag ${{ env.IMAGE_NAME }}:latest
 
       - name: Save image to cache (artifact)
-        run: docker save ${{ env.IMAGE_NAME }}:${{ needs.checkout.outputs.tag }} ${{ env.IMAGE_NAME }}:latest -o image.tar
+        run: docker save ${{ env.IMAGE_NAME }}:${{ env.TAG }} ${{ env.IMAGE_NAME }}:latest -o image.tar
 
       - name: Upload image artifact
         uses: actions/upload-artifact@v4
@@ -74,5 +70,5 @@ jobs:
 
       - name: Push both tags (versioned + latest)
         run: |
-          docker push ${{ env.IMAGE_NAME }}:${{ needs.checkout.outputs.tag }}
+          docker push ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           docker push ${{ env.IMAGE_NAME }}:latest
