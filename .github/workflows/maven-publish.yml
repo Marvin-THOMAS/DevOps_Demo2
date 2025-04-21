@@ -32,3 +32,9 @@ jobs:
         with:
           name: helloapi-jar
           path: target/*.jar
+          
+      - name: Deploy to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn deploy --settings .github/settings.xml     
