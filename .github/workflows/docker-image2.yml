@@ -20,7 +20,11 @@ jobs:
 
       - name: Generate Docker image tag
         id: generate-tag
-        run: echo "tag=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+        run: echo "tag=$(date +%Y%m%d%H%M%S)" >> "$GITHUB_OUTPUT"
+        
+      - name: Affiche le tag
+        run: echo "Tag généré : ${{ steps.generate-tag.outputs.tag }}"
+
 
   build:
     name: Build Docker Image
