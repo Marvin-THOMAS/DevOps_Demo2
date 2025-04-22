@@ -9,10 +9,8 @@
 name: 01-Java CI with Maven standalone 
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch: # declanchement manuel
+    
 
 jobs:
   build:
