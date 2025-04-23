@@ -1,6 +1,7 @@
 name: CI with Docker
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
@@ -56,7 +57,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t your-username/helloapi:latest .
+        run: docker build -t nyak1937/helloapi:latest .
 
       - name: Push Docker image
-        run: docker push your-username/helloapi:latest
+        run: docker push nyak1937/helloapi:latest
