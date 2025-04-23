@@ -10,7 +10,7 @@ class HelloapiApplicationTests {
 
 	@Test
 	void addition() {
-        assertEquals(4, 2 + 2);
+        assertEquals(4, 4);
     }
 
 }
